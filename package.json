@@ -1,0 +1,148 @@
+{
+    "name": "magento-command",
+    "displayName": "magento-command",
+    "publisher": "徐凯",
+    "description": "Magento command vscode plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "vscode",
+        "plugin",
+        "magento"
+    ],
+    "icon": "images/logo.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sxei/vscode-plugin-demo"
+    },
+    "engines": {
+        "vscode": "^1.70.0"
+    },
+    "categories": [
+        "Extension Packs"
+    ],
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "magento-batch.refreshEntry",
+                "title": "Refresh",
+                "icon": {
+                    "light": "./images/refresh.svg",
+                    "dark": "./images/refresh.svg"
+                }
+            },
+            {
+                "command": "magento-batch-common.refreshEntry",
+                "title": "Refresh",
+                "icon": {
+                    "light": "./images/refresh.svg",
+                    "dark": "./images/refresh.svg"
+                }
+            },
+            {
+                "command": "shell.runCommand",
+                "title": "Run Command",
+                "category": "Shell"
+            },
+            {
+                "command": "magento-batch.editEntry",
+                "title": "args",
+                "icon": {
+                    "light": "./images/add.svg",
+                    "dark": "./images/add.svg"
+                }
+            },
+            {
+                "command": "magento-batch.deleteEntry",
+                "title": "复制命令"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "magento",
+                    "title": "magento",
+                    "icon": "./images/magento-icon.svg"
+                }
+            ]
+        },
+        "views": {
+            "magento": [
+                {
+                    "id": "magento-batch-common",
+                    "name": "Magento Batch Common",
+                    "visibility": "visible"
+                },
+                {
+                    "id": "magento-batch",
+                    "name": "Magento Batch",
+                    "visibility": "collapsed"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "magento-batch-common.refreshEntry",
+                    "when": "view == magento-batch-common",
+                    "group": "navigation"
+                },
+                {
+                    "command": "magento-batch.refreshEntry",
+                    "when": "view == magento-batch",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "magento-batch.editEntry",
+                    "when": "view in ext.editEntryList && viewItem == args",
+                    "group": "inline"
+                },
+                {
+                    "command": "magento-batch.deleteEntry",
+                    "when": "view in ext.editEntryList && viewItem == args"
+                }
+            ]
+        },
+        "configuration": [
+            {
+                "title": "magento-batch-common-customize",
+                "properties": {
+                    "magento-batch-common-customize": {
+                        "type": "object",
+                        "default": {},
+                        "description": "magento 常用命令配置"
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^8.0.1",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "16.x",
+        "@types/vscode": "^1.75.0",
+        "@typescript-eslint/eslint-plugin": "^5.49.0",
+        "@typescript-eslint/parser": "^5.49.0",
+        "@vscode/test-electron": "^2.2.2",
+        "eslint": "^8.33.0",
+        "glob": "^8.1.0",
+        "mocha": "^10.1.0",
+        "typescript": "^4.9.4"
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.191",
+        "iconv-lite": "^0.6.3",
+        "lodash": "^4.17.21"
+    }
+}
