@@ -31,14 +31,35 @@ export function activate(context: vscode.ExtensionContext) {
     );
     let argsHistoryObj = new ArgsHistory();
     /**
+     * 命令运行
+     */
+    context.subscriptions.push(
+        vscode.commands.registerCommand("magento-batch-run.editEntry", (node: MagentoTreeItem) => {
+            // let nodeCmdStr = node.cmd;
+            // let lastArgs = argsHistoryObj.getArgs(nodeCmdStr); // 最后一次录入的参数
+            // var options = {
+            //     placeHolder: `Please enter args for ${nodeCmdStr}.`,
+            //     value: lastArgs,
+            // };
+            // this.command = {
+            //     title: "magento cmd",
+            //     command: "shell.runCommand",
+            //     arguments: [this.cmd],
+            // };
+            // vscode.commands.executeCommand("shell.runCommand", { arguments: node.cmd }, () => {
+            //     console.log(111);
+            // });
+        })
+    );
+    /**
      * 参数追加
      */
     context.subscriptions.push(
-        vscode.commands.registerCommand("magento-batch.editEntry", (node: MagentoTreeItem) => {
+        vscode.commands.registerCommand("magento-batch-args.editEntry", (node: MagentoTreeItem) => {
             let nodeCmdStr = node.cmd;
             let lastArgs = argsHistoryObj.getArgs(nodeCmdStr); // 最后一次录入的参数
             var options = {
-                placeHolder: `Please enter args for ${nodeCmdStr}.`,
+                placeHolder: `设置参数 ${nodeCmdStr}.`,
                 value: lastArgs,
             };
             vscode.window.showInputBox(options).then((args) => {
@@ -91,4 +112,4 @@ export function activate(context: vscode.ExtensionContext) {
     );
 }
 
-export function deactivate() {}
+export function deactivate() { }

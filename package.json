@@ -46,8 +46,16 @@
                 "category": "Shell"
             },
             {
-                "command": "magento-batch.editEntry",
-                "title": "args",
+                "command": "magento-batch-run.editEntry",
+                "title": "运行",
+                "icon": {
+                    "light": "./images/run.svg",
+                    "dark": "./images/run.svg"
+                }
+            },
+            {
+                "command": "magento-batch-args.editEntry",
+                "title": "参数",
                 "icon": {
                     "light": "./images/add.svg",
                     "dark": "./images/add.svg"
@@ -63,7 +71,8 @@
                 {
                     "id": "magento",
                     "title": "magento",
-                    "icon": "./images/magento-icon.svg"
+                    "icon": "./images/magento-icon.svg",
+                    "when": "isLinux || isMac"
                 }
             ]
         },
@@ -96,9 +105,14 @@
             ],
             "view/item/context": [
                 {
-                    "command": "magento-batch.editEntry",
+                    "command": "magento-batch-run.editEntry",
                     "when": "view in ext.editEntryList && viewItem == args",
-                    "group": "inline"
+                    "group": "inline@1"
+                },
+                {
+                    "command": "magento-batch-args.editEntry",
+                    "when": "view in ext.editEntryList && viewItem == args",
+                    "group": "inline@2"
                 },
                 {
                     "command": "magento-batch.deleteEntry",
