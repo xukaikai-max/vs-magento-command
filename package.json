@@ -1,9 +1,9 @@
 {
     "name": "magento-command",
     "displayName": "magento-command",
-    "publisher": "徐凯",
+    "publisher": "xukai",
     "description": "Magento command vscode plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "vscode",
         "plugin",
@@ -12,10 +12,10 @@
     "icon": "images/logo.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/sxei/vscode-plugin-demo"
+        "url": "https://github.com/xukaikai-max/vs-magento-command"
     },
     "engines": {
-        "vscode": "^1.70.0"
+        "vscode": "^1.75.0"
     },
     "categories": [
         "Extension Packs"
@@ -46,8 +46,16 @@
                 "category": "Shell"
             },
             {
-                "command": "magento-batch.editEntry",
-                "title": "args",
+                "command": "magento-batch-run.editEntry",
+                "title": "运行",
+                "icon": {
+                    "light": "./images/run.svg",
+                    "dark": "./images/run.svg"
+                }
+            },
+            {
+                "command": "magento-batch-args.editEntry",
+                "title": "参数",
                 "icon": {
                     "light": "./images/add.svg",
                     "dark": "./images/add.svg"
@@ -96,9 +104,14 @@
             ],
             "view/item/context": [
                 {
-                    "command": "magento-batch.editEntry",
+                    "command": "magento-batch-run.editEntry",
                     "when": "view in ext.editEntryList && viewItem == args",
-                    "group": "inline"
+                    "group": "inline@1"
+                },
+                {
+                    "command": "magento-batch-args.editEntry",
+                    "when": "view in ext.editEntryList && viewItem == args",
+                    "group": "inline@2"
                 },
                 {
                     "command": "magento-batch.deleteEntry",

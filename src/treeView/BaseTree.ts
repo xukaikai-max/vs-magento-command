@@ -63,10 +63,10 @@ export class MagentoTreeItem extends vscode.TreeItem {
         // 调用父级的构造类
         super(label, collapsibleState);
         // 光标悬停时候的标题
-        this.tooltip = `${this.label}`;
+        this.tooltip = `${this.description}`;
         this.description = description;
         this.setCmd(this.cmdStr);
-        this.setCommand(this.cmdStr);
+        // this.setCommand(this.cmdStr);
         this.setContextValue(this.cmdStr);
     }
     /**
@@ -82,7 +82,7 @@ export class MagentoTreeItem extends vscode.TreeItem {
     }
 
     /**
-     * 设置点击出发的命令
+     * 设置点击触发的命令，暂时不用
      * @param cmd
      */
     setCommand(cmd: string) {

@@ -31,14 +31,22 @@ export function activate(context: vscode.ExtensionContext) {
     );
     let argsHistoryObj = new ArgsHistory();
     /**
-     * 参数追加
+     * 点击图标，命令运行
      */
     context.subscriptions.push(
-        vscode.commands.registerCommand("magento-batch.editEntry", (node: MagentoTreeItem) => {
+        vscode.commands.registerCommand("magento-batch-run.editEntry", (node: MagentoTreeItem) => {
+            vscode.commands.executeCommand("shell.runCommand", node.cmd);
+        })
+    );
+    /**
+     * 点击图标，参数追加
+     */
+    context.subscriptions.push(
+        vscode.commands.registerCommand("magento-batch-args.editEntry", (node: MagentoTreeItem) => {
             let nodeCmdStr = node.cmd;
             let lastArgs = argsHistoryObj.getArgs(nodeCmdStr); // 最后一次录入的参数
             var options = {
-                placeHolder: `Please enter args for ${nodeCmdStr}.`,
+                placeHolder: `设置参数 ${nodeCmdStr}.`,
                 value: lastArgs,
             };
             vscode.window.showInputBox(options).then((args) => {
@@ -63,6 +71,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
     // 为参数追加设置一个数组变量，方便设置 "when": "view in ext.editEntryList && viewItem == args",
     vscode.commands.executeCommand("setContext", "ext.editEntryList", ["magento-batch", "magento-batch-common"]);
+
     /**
      * 常用命令 刷新按钮事件载入
      */
