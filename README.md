@@ -2,7 +2,7 @@
 
 - 智能读取 magento 的命令数据，方便使用
 
-  ![image-20230222132858360](https://raw.githubusercontent.com/xukaikai-max/vs-magento-command/master/images/md/image-20230222132858360.png)
+  ![image-20230222132858360](https://raw.githubusercontent.com/xukaikai-max/vs-magento-command/master/images/marddown/1.0.1/1677117789750.jpg)
 
 ## 1. magento 常用命令部分：magento-batch-common
 
@@ -32,11 +32,11 @@
 
 ![image-20230222133545954](https://raw.githubusercontent.com/xukaikai-max/vs-magento-command/master/images/md/image-20230222133545954.png)
 
-## 3. 调用命令时追加参数
-
+## 3. 命令调用
+### 3.1：命令调用
+![image-20230222133838832](https://raw.githubusercontent.com/xukaikai-max/vs-magento-command/master/images/marddown/1.0.1/1677118005034.jpg)
+### 3.2：参数追加
 ![image-20230222133757864](https://raw.githubusercontent.com/xukaikai-max/vs-magento-command/master/images/md/image-20230222133757864.png)
-
-![image-20230222133838832](https://raw.githubusercontent.com/xukaikai-max/vs-magento-command/master/images/md/image-20230222133838832.png)
 
 ## 4. 命令复制
 

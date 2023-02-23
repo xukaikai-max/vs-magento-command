@@ -1,9 +1,9 @@
 {
     "name": "magento-command",
     "displayName": "magento-command",
-    "publisher": "徐凯",
+    "publisher": "xukai",
     "description": "Magento command vscode plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "vscode",
         "plugin",
@@ -15,7 +15,7 @@
         "url": "https://github.com/sxei/vscode-plugin-demo"
     },
     "engines": {
-        "vscode": "^1.70.0"
+        "vscode": "^1.75.0"
     },
     "categories": [
         "Extension Packs"
@@ -71,8 +71,7 @@
                 {
                     "id": "magento",
                     "title": "magento",
-                    "icon": "./images/magento-icon.svg",
-                    "when": "isLinux || isMac"
+                    "icon": "./images/magento-icon.svg"
                 }
             ]
         },

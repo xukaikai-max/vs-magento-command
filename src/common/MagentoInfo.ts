@@ -17,8 +17,8 @@ export class MagentoInfo {
      * 获取 magento 路径
      * @return String
      */
-    static getMagentoPath(): string {
-        if (this.magentoPath === "" || !PathHelper.getProjectPath()) {
+    static getMagentoPath(): string | undefined {
+        if (this.magentoPath === "" && PathHelper.getProjectPath()) {
             this.magentoPath = `${PathHelper.getProjectPath()}${path.sep}bin${path.sep}magento`;
         }
         return this.magentoPath;
