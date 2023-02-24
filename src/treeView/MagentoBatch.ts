@@ -1,15 +1,15 @@
 import { LogHelper } from "../components/helper/LogHelper";
-import { BaseTree } from "./BaseTree";
+import { BatchBaseTree } from "./BatchBaseTree";
 import { MagentoInfo } from "../common/MagentoInfo";
 
-export class MagentoBatch extends BaseTree {
+export class MagentoBatch extends BatchBaseTree {
     /**
      * /usr/local/bin/php
      * 解析 magento 的 batch 命令
      * @returns
      */
     getMagentiBathcommandList(): { [key: string]: { [key: string]: string } } {
-        let magentoList = MagentoInfo.getMagentiBathStr().split("\\")[0].split("\n");
+        let magentoList = MagentoInfo.getMagentoBathStr().split("\\")[0].split("\n");
         if (magentoList.length < 1) {
             LogHelper.showErrorMess("magento batch 命令解析错误.");
         }

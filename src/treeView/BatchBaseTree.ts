@@ -5,17 +5,17 @@ import { MagentoInfo } from "../common/MagentoInfo";
 /**
  * magento 的导航标签基类
  */
-export abstract class BaseTree implements vscode.TreeDataProvider<MagentoTreeItem> {
-    getTreeItem(element: MagentoTreeItem): MagentoTreeItem {
+export abstract class BatchBaseTree implements vscode.TreeDataProvider<BatchTreeItem> {
+    getTreeItem(element: BatchTreeItem): BatchTreeItem {
         return element;
     }
-    getChildren(element?: MagentoTreeItem): Thenable<MagentoTreeItem[]> {
+    getChildren(element?: BatchTreeItem): Thenable<BatchTreeItem[]> {
         if (!element) {
             // 初始没有值的时候，便利最外侧的值
             if (this.getMagentiBathcommandList()) {
-                const outerInfo: MagentoTreeItem[] = [];
+                const outerInfo: BatchTreeItem[] = [];
                 Object.keys(this.getMagentiBathcommandList()).forEach((label, index) => {
-                    outerInfo.push(new MagentoTreeItem(label, "", "", vscode.TreeItemCollapsibleState.Collapsed));
+                    outerInfo.push(new BatchTreeItem(label, "", "", vscode.TreeItemCollapsibleState.Collapsed));
                 });
                 return Promise.resolve(outerInfo);
             } else {
@@ -24,9 +24,9 @@ export abstract class BaseTree implements vscode.TreeDataProvider<MagentoTreeIte
         } else {
             let currentGroup: any = element.label;
             const sonList = this.getMagentiBathcommandList()[currentGroup];
-            const outerInfo: MagentoTreeItem[] = [];
+            const outerInfo: BatchTreeItem[] = [];
             Object.keys(sonList).forEach((label, index) => {
-                outerInfo.push(new MagentoTreeItem(label, sonList[label], label, vscode.TreeItemCollapsibleState.None));
+                outerInfo.push(new BatchTreeItem(label, sonList[label], label, vscode.TreeItemCollapsibleState.None));
             });
             return Promise.resolve(outerInfo);
         }
@@ -35,10 +35,10 @@ export abstract class BaseTree implements vscode.TreeDataProvider<MagentoTreeIte
     abstract getMagentiBathcommandList(): { [key: string]: { [key: string]: string } };
 
     // 刷新按钮代码
-    public _onDidChangeTreeData: vscode.EventEmitter<MagentoTreeItem | undefined | null | void> = new vscode.EventEmitter<MagentoTreeItem | undefined | null | void>();
-    readonly onDidChangeTreeData: vscode.Event<MagentoTreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
+    public _onDidChangeTreeData: vscode.EventEmitter<BatchTreeItem | undefined | null | void> = new vscode.EventEmitter<BatchTreeItem | undefined | null | void>();
+    readonly onDidChangeTreeData: vscode.Event<BatchTreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
     refresh(): void {
-        MagentoInfo.setMagentiBathStr("");
+        MagentoInfo.setMagentoBathStr("");
         this._onDidChangeTreeData.fire();
     }
 }
@@ -50,7 +50,7 @@ export abstract class BaseTree implements vscode.TreeDataProvider<MagentoTreeIte
  *   collapsibleState：TreeItemCollapsibleState.Expanded  树显示为已展开。
  *   collapsibleState：TreeItemCollapsibleState.None      表示树项没有子项。
  */
-export class MagentoTreeItem extends vscode.TreeItem {
+export class BatchTreeItem extends vscode.TreeItem {
     cmd: string = "";
     /**
      *
@@ -103,10 +103,6 @@ export class MagentoTreeItem extends vscode.TreeItem {
     setContextValue(cmd: string) {
         let phpPath = PathHelper.getPhpPath();
         let magentoPath = MagentoInfo.getMagentoPath();
-        console.log(`cmd : ${cmd}`);
-        console.log(`phpPath : ${phpPath}`);
-        console.log(`magentoPath : ${magentoPath}`);
-
         if (cmd && phpPath && magentoPath) {
             this.contextValue = "args";
         }

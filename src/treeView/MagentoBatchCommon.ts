@@ -1,16 +1,16 @@
 import * as _ from "lodash";
 import { SettingInfo } from "../common/SettingInfo";
 import { MagentoInfo } from "../common/MagentoInfo";
-import { BaseTree } from "./BaseTree";
+import { BatchBaseTree } from "./BatchBaseTree";
 
-export class MagentoBatchCommon extends BaseTree {
+export class MagentoBatchCommon extends BatchBaseTree {
     /**
      * /usr/local/bin/php
      * 解析 magento 的 batch 命令
      * @returns
      */
     getMagentiBathcommandList(): { [key: string]: { [key: string]: string } } {
-        if (!MagentoInfo.getMagentiBathStr()) {
+        if (!MagentoInfo.getMagentoBathStr()) {
             return {};
         }
         let magentiBathcommandList = {

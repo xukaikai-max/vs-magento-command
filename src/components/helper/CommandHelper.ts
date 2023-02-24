@@ -14,7 +14,9 @@ export class CommandHelper extends BaseHelper {
      * @param options
      */
     static exec(cmd: string) {
-        let cmdList = _.split(cmd, " ");
+        let cmdList = _.split(cmd, " ").filter((cmd) => {
+            return cmd !== "";
+        });
         const spawn = childProcess.spawn(cmdList[0], _.slice(cmdList, 1));
         LogHelper.showOutputChannelMess(`>>> Command start run : \`${cmd}\` `); // 输出命令开始日志
         spawn.stdout.setEncoding("binary");

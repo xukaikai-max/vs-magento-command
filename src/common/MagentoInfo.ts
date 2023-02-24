@@ -4,14 +4,39 @@ import { CommandHelper } from "../components/helper/CommandHelper";
 
 export class MagentoInfo {
     /**
-     * batch list 结果
+     * 获取命令执行前部分信息
      */
-    private static magentiBathStr: string = "";
+    private static commandStr: string = "";
 
     /**
      * magento 路径信息
      */
     private static magentoPath: string = "";
+
+    /**
+     * batch list 结果
+     */
+    private static magentoBathStr: string = "";
+
+    /**
+     * module list 结果
+     */
+    private static magentoModuleList: string[] = [];
+
+    /**
+     * 获取命令执行前部分信息
+     * @returns
+     */
+    static getCommandStr(): string {
+        if (!this.commandStr) {
+            let phpPath = PathHelper.getPhpPath();
+            let magentoPath: string | undefined = this.getMagentoPath();
+            if (magentoPath && phpPath) {
+                this.commandStr = `${phpPath} ${magentoPath} `;
+            }
+        }
+        return this.commandStr;
+    }
 
     /**
      * 获取 magento 路径
@@ -35,22 +60,43 @@ export class MagentoInfo {
     /**
      * 获取 batch 命令的字符串
      */
-    static getMagentiBathStr(): string {
-        if (!this.magentiBathStr) {
-            let phpPath = PathHelper.getPhpPath();
-            let magentoPath: string | undefined = this.getMagentoPath();
-            if (magentoPath && phpPath) {
-                this.magentiBathStr = CommandHelper.getExecData(`${phpPath} ${magentoPath} list`);
+    static getMagentoBathStr(): string {
+        if (!this.magentoBathStr) {
+            if (this.getCommandStr()) {
+                this.magentoBathStr = CommandHelper.getExecData(`${this.getCommandStr()} list`);
             }
         }
-        return this.magentiBathStr;
+        return this.magentoBathStr;
     }
 
     /**
      * 获取 batch 命令的字符串
      */
-    static setMagentiBathStr(magentiBathStr: string): MagentoInfo {
-        this.magentiBathStr = magentiBathStr;
+    static setMagentoBathStr(magentiBathStr: string): MagentoInfo {
+        this.magentoBathStr = magentiBathStr;
+        return this;
+    }
+
+    /**
+     * 获取 module 命令的结果集
+     */
+    static getMagentoModuleList(): string[] {
+        if (this.magentoModuleList.length === 0) {
+            if (this.getCommandStr()) {
+                let moduleStr = CommandHelper.getExecData(`${this.getCommandStr()} module:status`);
+                this.magentoModuleList = moduleStr.split("\n").filter((val) => {
+                    return val.includes("_") && val !== "";
+                });
+            }
+        }
+        return this.magentoModuleList;
+    }
+
+    /**
+     * 设置 module 命令的结果集
+     */
+    static setMagentoModuleList(moduleList: string[]): MagentoInfo {
+        this.magentoModuleList = moduleList;
         return this;
     }
 }

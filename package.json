@@ -54,6 +54,14 @@
                 }
             },
             {
+                "command": "magento-generator-code.editEntry",
+                "title": "运行",
+                "icon": {
+                    "light": "./images/run.svg",
+                    "dark": "./images/run.svg"
+                }
+            },
+            {
                 "command": "magento-batch-args.editEntry",
                 "title": "参数",
                 "icon": {
@@ -86,6 +94,11 @@
                     "id": "magento-batch",
                     "name": "Magento Batch",
                     "visibility": "collapsed"
+                },
+                {
+                    "id": "magento-generator-code",
+                    "name": "Magento Generator code",
+                    "visibility": "collapsed"
                 }
             ]
         },
@@ -112,6 +125,11 @@
                     "command": "magento-batch-args.editEntry",
                     "when": "view in ext.editEntryList && viewItem == args",
                     "group": "inline@2"
+                },
+                {
+                    "command": "magento-generator-code.editEntry",
+                    "when": "view == magento-generator-code",
+                    "group": "inline"
                 },
                 {
                     "command": "magento-batch.deleteEntry",
